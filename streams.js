@@ -52,8 +52,21 @@ function more(a, b) {
         : pair(a, () => more(a + 1, b));
 }
 
+function n_of_n_stream() {
+    function iter(x, count) {
+        return x === count
+            ? iter(x + 1, 0)
+            : pair(x, () => iter(x, count + 1));
+    }
+    return iter(1, 0);
+}
 
-
+function shorten_stream(s, k) {
+    return k === 0 || is_null(s)
+        ? null
+        : pair(head(s),
+            () => shorten_stream(stream_tail(s), k - 1));
+}
 
 
 
